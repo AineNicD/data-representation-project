@@ -1,6 +1,6 @@
 # Data Representation Big Project
 
-This repository contains my submission for the Big Project assessment for Data Representation module at GMIT.
+This repository contains my submission for the Big Project assessment in Data Representation.
 
 ## Project description: 
 ~~~
@@ -11,7 +11,7 @@ RESTful APIs.
 
 ## Repository files:
 
-- A Flask server application program named [server.py]().
+- A Flask server application program named [app.py]().
 - the rest to be added here 
 
 
@@ -27,11 +27,11 @@ RESTful APIs.
 
  - Load a file of packages: <b> pip install -r requirements.txt </b> 
 
- - Set the server environmental variable. <b> set FLASK_APP=server </b> on windows or <b> export FLASK_APP=application </b> on Mac. 
+ - Set the server environmental variable: <b>set FLASK_APP=app</b> on windows or <b> export FLASK_APP=app </b> on Mac. 
 
  - Run the server: <b> flask run </b>   This will start the application on http://127.0.0.1:5000/. Copy the link into your browser. Click the link to access the web interface.
 
-  - To stop the server running, use <b> ctrl + c. </b>
+  - To stop the server running: use <b> ctrl + c. </b>
 
 
 ## References:
