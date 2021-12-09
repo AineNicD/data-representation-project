@@ -19,7 +19,7 @@ RESTful APIs.
 
 - Make a virtual environment with a directory named venv.: <b> python -m venv venv</b>
 
-- Run the virtual envirnoment: <b>.\venv\Scripts\activate.bat on Windows or source venv/bin/activate on Mac/Linux </b>
+- Run the virtual envirnoment: <b>.\venv\Scripts\activate.bat</b> on Windows or <b>source venv/bin/activate </b> on Mac/Linux 
 
  - See the packages: <b> pip freeze </b>
 
@@ -27,7 +27,7 @@ RESTful APIs.
 
  - Load a file of packages: <b> pip install -r requirements.txt </b> 
 
- - Set the server environmental variable: <b>set FLASK_APP=app</b> on windows or <b> export FLASK_APP=app </b> on Mac. 
+ - Set the server environmental variable: <b>set FLASK_APP=app</b> on windows or <b>export FLASK_APP=app</b> on Mac. 
 
  - Run the server: <b> flask run </b>   This will start the application on http://127.0.0.1:5000/. Copy the link into your browser. Click the link to access the web interface.
 
