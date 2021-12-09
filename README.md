@@ -12,7 +12,7 @@ RESTful APIs.
 ## Repository files:
 
 - A Flask server application program named [app.py]().
-- the rest to be added here 
+- the rest to be added here when figure out the layout ( I am currently in a battle with errors) 
 
 
 ### Activate a virtual environment using the following commands on the command line:
@@ -35,5 +35,17 @@ RESTful APIs.
 
 
 ## References:
-- Andrew Beatty course material
-- [Flask documentation](https://flask.palletsprojects.com/en/2.0.x/)
+- Andrew Beatty course material on moodle
+- Andrew Beatty datarepresentation 2021 github 
+- [open weather map](https://openweathermap.org/)- open weather map provides API keys to anyone who signs up by email. I used this API key to link to a third party API and retrieve weather data using get and post methods in python flask.  
+- [Flask documentation](https://flask.palletsprojects.com/en/2.0.x/)- The flask documentation goes through everything to do with flask. 
+- [Tim Ruscica tutorial](https://www.techwithtim.net/tutorials/flask/)- Tim is the founder of Tech with Tim Inc and a programming course creator who has many tutorials and good youtube videos, I found this video on flask particularly helpful while working on this project. 
+- [Python flask Website](https://csveda.com/python-flask-website-adding-routes-to-link-pages/)- "Adding Routes to Link Pages", Published June 7, 2020.
+- [tutorialspoint.com](https://www.tutorialspoint.com/flask/index.htm), "Flask tutorial", - a very helpful tutorial that goes through everything step by step. 
+- [w3schools](https://www.w3schools.com/) is a freemium educational website for learning coding online. Developed in 1998, its name is derived from the World Wide Web. W3Schools offers courses covering all aspects of web development. I found the following tutorials particularly helpful; 
+    - [AJAX tutorial](https://www.w3schools.com/js/js_ajax_intro.asp) 
+    - [JSON tutorial](https://www.w3schools.com/js/js_json_intro.asp) 
+    - [bootstrap tutorial](https://www.w3schools.com/bootstrap5/bootstrap_get_started.php)
+    - [CSS tutorial](https://www.w3schools.com/css/)
+- [real python](https://realpython.com/) has  Python tutorials for developers of all skill levels, I found their [Flask tutorial](https://realpython.com/python-web-applications-with-flask-part-i/) very helpful. 
+
