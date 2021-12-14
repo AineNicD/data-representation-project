@@ -13,7 +13,7 @@ RESTful APIs.
 ## Repository files:
 
 - [app.py]() - A Flask server that has a REST API that performs CRUD operations. 
-- [init.sql]() which contains the SQL code to create the database Vaccination, that has two tables, recipients and vaccinators. There is a third table called users that was used to create the users for authorisation logging in.
+- [initdb.sql]() which contains the SQL code to create the database Vaccination, that has two tables, recipients and vaccinators. There is a third table called users that was used to create the users for authorisation logging in.
 - [dbconfig.py]() - A configuration file for the SQL database.
 - A data access object file called [VaccinationDao]() which contains CRUD operations for both tables within the Vaccination database. 
 - [templates/base.html]() contains the base html for the web pages. 
