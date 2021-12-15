@@ -16,15 +16,16 @@ RESTful APIs.
 - [app.py](https://github.com/AineNicD/data-representation-project/blob/main/app.py) - A Flask server that has a REST API that performs CRUD operations. 
 - [initdb.sql](https://github.com/AineNicD/data-representation-project/blob/main/initdb.sql) which contains the SQL code to create the database Vaccination, that has two tables, recipients and vaccinators. There is a third table called users that was used to create the users for authorisation logging in.
 - [dbconfig.py](https://github.com/AineNicD/data-representation-project/blob/main/dbconfig.py) - A configuration file for the SQL database.
-- A data access object file called [VaccinationDao](https://github.com/AineNicD/data-representation-project/blob/main/VaccinationDAO.py) which contains CRUD operations for both tables within the Vaccination database. 
-- [templates/base.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/base.html) contains the base html for the web pages. 
-- [templates/index.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/index.html) contains the html for the homepage. 
-- [templates/login](https://github.com/AineNicD/data-representation-project/blob/main/templates/login.html) contains the html for the login form.  For the purpose of the project the username and password are displayed in the login form. 
-- [templates/recipient.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/recipient.html) contains the accompanying web interface for the recipient table that uses AJAX calls to perform CRUD operations. 
-- [templates/vaccinator.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/vaccinator.html) contains the accompanying web interface for the vaccinator table that uses AJAX calls to perform CRUD operations. 
-- [templates/getWeather.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/getWeather.html) contains the submit form for the function 'get_weather' which links the server to a third party API to retrieve the current weather in any city/country. 
-- [templates/weatherresult.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/weatherresult.html) displays the searched weather result. 
-- [templates/aimsir.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/aimsir.html) contains a barchart to display average weather from a csv file. 
+- [VaccinationDao](https://github.com/AineNicD/data-representation-project/blob/main/VaccinationDAO.py) contains CRUD operations for both tables within the Vaccination database. 
+- [templates](https://github.com/AineNicD/data-representation-project/tree/main/templates) - contains the html pages and images. 
+    - [templates/base.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/base.html) contains the base html for the web pages. 
+    - [templates/index.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/index.html) contains the html for the homepage. 
+    - [templates/login](https://github.com/AineNicD/data-representation-project/blob/main/templates/login.html) contains the html for the login form.  For the purpose of the     project the username and password are displayed in the login form. 
+    - [templates/recipient.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/recipient.html) contains the accompanying web interface for the recipient table that uses AJAX calls to perform CRUD operations. 
+    - [templates/vaccinator.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/vaccinator.html) contains the accompanying web interface for the vaccinator table that uses AJAX calls to perform CRUD operations. 
+    - [templates/getWeather.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/getWeather.html) contains the submit form for the function 'get_weather' which links the server to a third party API to retrieve the current weather in any city/country. 
+    - [templates/weatherresult.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/weatherresult.html) displays the searched weather result. 
+    - [templates/aimsir.html](https://github.com/AineNicD/data-representation-project/blob/main/templates/aimsir.html) contains a barchart to display average weather from a csv file. 
 - There are images in the style to try make the web pages look nice. I had tried to have a seperate style.css file but it kept producing errors and so the style is within the pages but the base.html file holds most script links. 
 
 
