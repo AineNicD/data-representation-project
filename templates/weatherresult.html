@@ -1,0 +1,69 @@
+ {% extends 'base.html' %}
+
+    {% block content %}
+	<style>
+  /* Adding image to backround */
+    html { 
+        background: url(weather.jpg) no-repeat center fixed; 
+        background-size: cover;
+    }
+	
+	/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: powderblue;
+  border:solid;
+  /* border around the navigation menu*/
+  border-color:black
+}
+
+/* Style the topnav links */
+    .topnav a {
+     float: left;
+     display: block;
+     color: black;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+    }
+
+    /* Change color on hover */
+    .topnav a:hover {
+     background-color: #ddd;
+     color: black;
+    }
+.    topnav a.active {
+     background-color: #04AA6D;
+     color: white;
+    }
+	
+	</style>	
+	<Header>
+        <button class="btn" id="home-button"><a href="/index"><i class="fa fa-home"></i></button></a>
+        <button class="btn" id="logout-button"><a href="/logout"><i class="fa fa-sign-out" style="font-size:25px"></i>Logout</a></button>
+
+    <title>weather result</title>
+		<div class="topnav">
+             <!-- Reference to all the pages -->
+	    <a href="/index">Home</a>
+        <a href="/database">SQL Vaccine Database</a>
+		<a href="/weather">Get weather through third party API</a>
+		<a href="/aimsir.html">Weather Chart</a>
+    </div>	
+</Header>	
+	<!-- weather form result display -->
+    <div class="container h-100">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-sm-12 col-xs-12 pt-5">
+                <div class="card border-0 p-3 shadow-sm text-center">
+                    <h3 class="text-muted">Current Weather For {{ city }}</h3>
+                    <h5 class="lead text-muted">Temperature: {{ temp }} C</h5>
+                    <h5 class="lead text-muted">Humidity: {{ humidity }}%</h5>
+                    <h5 class="lead text-muted">Wind Speed: {{ wind_speed }} kmph</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ {% endblock content %}
+ 

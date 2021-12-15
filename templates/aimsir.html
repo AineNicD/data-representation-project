@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<!-- viewpoint fit to screen-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>weather chart</title>
+		 <!-- D3 -->
+		<script src="https://d3js.org/d3.v6.min.js"></script>
+	</head>
+<style>
+    /* Adding my image to backround */
+    html { 
+        background: url(sun.jpg) no-repeat center fixed; 
+        background-size: cover;
+    }
+	
+	
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: powderblue;
+  border:solid;
+  /* border around the navigation menu*/
+  border-color:black
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change color on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+/* to move top nav to the right*/
+.topnav-right {
+  float: right;
+  
+.btn1 {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Darker background on mouse-over */
+.btn1:hover {
+  background-color: RoyalBlue;
+}
+</style>
+
+ <!-- the Header-->
+<header>
+ <button class="btn" id="home-button"><a href="/index"><i class="fa fa-home"></i></a></button>
+        <button class="btn" id="logout-button"><a href="/logout"><i class="fa fa-sign-out" style="font-size:25px"></i>Logout</a></button>
+<h1>Barchart of average irish climate from csv file</h1>    
+
+</header>
+           <!-- Navigation Bar !-->
+        <!--nav settings -->
+	<div class="topnav">
+         <!-- Reference to all the pages -->
+        <a href="/index">Home</a></span></a>
+        <a href="/database">SQL Vaccine Database</a>
+		<a href="/weather">Get weather through third party API</a>
+		<a href="/aimsir.html">Weather Chart</a>
+    </div>	  
+<body>
+    <h2>Average Degree by Month</h2>
+    <p>Data from <a href="https://www.climatestotravel.com/climate/ireland">Climates to travel</a> website, which I added to a csv file. </p>
+	<div id="myDiv">     
+	    <!-- creating a place to hold the chart size picker where the user can decide the size of the barchart-->
+        <p> Select Chart display Size:</p>
+        <select id="chartSize">
+            <option value="300">300 Pixels</option>      
+            <option value="400">400 Pixels</option>
+            <option value="500">500 Pixels</option>
+        </select>
+		<!-- colour picker where the user can decide the colours of the chart -->
+        <label for="colorPicker">Pick a colour:</label>
+        <input type="color" id="colorPicker" value="#FFB000" name="colorPicker">
+        <button onclick="fileChart()">Draw Chart</button>
+		
+		 <!-- output the svg chart on the page-->
+		<div id="myDiv">
+  
+      </div> 
+    </div>
+    
+
+<script>
+ function fileChart(){
+      //get data from CSV file
+      d3.csv("averageSun.csv").then(function(data){
+          console.log(data);
+  
+      // values for bar chart
+      var height = document.getElementById("chartSize").value;
+      var width = 600;
+      // counts the length of the data 
+      var dataCount = data.length;
+      // create a variable for the gap
+      var gap = 5;
+  
+      //color picker variable for user selected color
+      var chartColor = document.getElementById("colorPicker").value;
+      
+      // Convert to Numbers 
+      data.forEach(function(d){
+          d.Degree = Number(d.Degree);
+      })
+       // create a scale for the y-axis.
+      var yScale = d3.scaleLinear()
+          .domain([0,d3.max(data,function(d){
+              return d.Degree;
+          })])
+  
+          .range([height,0]);
+  
+       // a scale for the y-axis using scaleband so the labels are spaced out at the bottom of the chart 
+      var xScale = d3.scaleBand()
+          .domain(data.map(function(d){
+              return d.Month;
+          }))
+  
+          .range([0,width]); 
+  
+     // Create a vertical axis on the left for the y-axis using the scale  
+      var yAxis = d3.axisLeft()
+          .scale(yScale);
+  
+      // Create a horiontal axis on the bottom for the X axis using the x scale
+      var xAxis = d3.axisBottom()
+          .scale(xScale);
+  
+      //remove the previous chart before a new one is drawn
+      d3.select("#myDiv").selectAll("*").remove();
+     
+	 // create an SVG container 
+      var svgContainer = d3.select("#myDiv").append("svg")
+          .attr("width",800)
+          .attr("height",700);
+    
+      var myRectangle = svgContainer.selectAll("rect")
+        // associate the array with the data loaded from the csv file
+          .data(data);
+
+          //  add the attributes for each bar
+      myRectangle.enter()
+          .append("rect")
+              //before the transition 
+              .attr("stroke","green")
+              .attr("fill","powderblue")
+              // position of the bars
+              .attr("x",function(d,i){
+                  return 50 + (i*(width/dataCount)+gap);
+              })
+             
+              //  bars appear from top
+              .transition()
+              .duration(1000)
+              .delay(500)
+              .ease(d3.easeLinear)
+              // set some attributes for the final result
+              .attr("stroke","blue")
+              .attr("y",function(d){
+                  
+                  return yScale(d.Degree);
+              })
+             
+              .attr("width", (width/dataCount - gap))
+              // scale the height to the y scale 
+              .attr("height", function(d){
+                  return height - yScale(d.Degree);
+              })
+              // user picked color
+              .transition()
+              .duration(1000)
+              .attr("fill",chartColor);
+  
+      // append an svg group to the container, then call the y-axis
+      svgContainer.append("g")
+              .attr("transform","translate(45,0)")
+              .call(yAxis);
+  
+  
+      // append an svg group to the container
+      svgContainer.append("g")
+  
+              // adding the height 
+              .attr("transform", "translate(50, " + height + ")")
+              .call(xAxis)
+              // apply to all text elements on the x axis
+              .selectAll("text")
+              // apply a rotation to slant the labels
+              .attr("transform","rotate(60)")
+              // align the text on the x-axis              
+               .attr("text-anchor", "start")
+              // move so labels appear in the right position 
+               .attr("x","14")
+               .attr("y","6");
+  
+      });
+  }
+</script> 
+</body>
+</html>
+
+
+

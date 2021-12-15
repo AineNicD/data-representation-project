@@ -1,0 +1,114 @@
+ {% extends 'base.html' %}
+ {% block content %}
+<style>
+html {
+    background-image: url("database.jpg");
+    background-size: cover;
+    position: relative;
+    }
+
+
+/* This powderblue with borders is my favourite because it goes nicely with my scenic photos from conemara*/
+.blockcol {
+  background-color: powderblue;
+  color: black;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+/*another colour for columns */
+.babycol {
+  background-color: #e6bab1;
+  color: black;
+  border: 2px solid black;
+  margin: 20px;
+  padding: 20px;
+}
+		
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: powderblue;
+  border:solid;
+  /* border around the navigation menu*/
+  border-color:black
+}
+
+/* Style the topnav links */
+    .topnav a {
+     float: left;
+     display: block;
+     color: black;
+     text-align: center;
+     padding: 14px 16px;
+     text-decoration: none;
+    }
+
+    /* Change color on hover */
+    .topnav a:hover {
+     background-color: #ddd;
+     color: black;
+    }
+.    topnav a.active {
+     background-color: #04AA6D;
+     color: white;
+    }
+  
+  
+    #logout-button {
+            color: #3291e6;
+            font-size: 16px;
+            border: none;
+            margin-left: 1250px;
+            background-color: white;
+            text-decoration: none;
+        }
+    .button1 {
+         background-color: #0b40d1;
+         border: black;
+         color: white;
+         padding: 15px 32px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         margin: 4px 2px;
+        cursor: pointer;
+    }  
+	 .button2 {
+         background-color: #9e1056;
+         border: black;
+         color: white;
+         padding: 15px 32px;
+         text-align: center;
+         text-decoration: none;
+         display: inline-block;
+         font-size: 16px;
+         margin: 4px 2px;
+        cursor: pointer;
+    }  
+ </style>
+       <div class = "header">
+    <h1> Aine Nic Dhonnacha's Big Project</h1>    
+        </div>
+        <!-- Navigation Bar !-->
+        <!--nav settings -->
+        <button class="btn" id="home-button"><a href="/index"><i class="fa fa-home"></i></button></a>
+        </button>
+        <button class="btn" id="logout-button"><a href="/logout"><i class="fa fa-sign-out" style="font-size:25px"></i>Logout</a></button>
+
+	<div class="topnav">
+             <!-- Reference to all the pages -->
+	    <a href="/index">Home</a>
+        <a href="/database">SQL Vaccine Database</a>
+		<a href="/weather">Get weather through third party API</a>
+		<a href="/aimsir.html">Weather Chart</a>
+    </div>	   
+     <!-- Sql database section -->
+  
+            <button class = "button1"><a href="/recipientdata">Recipient Table</a></button>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <button class = "button2"> <a href="/vaccinatordata">Vaccinator Table</a></button>
+ 
+ {% endblock content %}
+

@@ -1,0 +1,8 @@
+MySQLdb
+flask==1.1.2
+flask_mysqldb
+mysql
+requests==2.25.1
+werkzeug==1.0.1
+mysql-connector==2.2.9
+MarkupSafe==1.0

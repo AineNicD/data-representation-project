@@ -1,0 +1,533 @@
+ {% extends 'base.html' %}
+ {% block content %} 
+
+    <title>Recipient Table</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+
+/* Style the top navigation bar */
+.topnav {
+  overflow: hidden;
+  background-color: powderblue;
+  border:solid;
+  /* border around the navigation menu*/
+  border-color:black
+}
+
+/* Style the topnav links */
+.topnav a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+  
+#logout-button {
+    margin-top: -65px;
+    cursor: pointer;
+    color: rgb(26, 63, 3);
+    font-size: 16px;
+    border: none;
+    margin-left: 1200px;
+    }
+        
+#home-button {
+    background-color: powderblue;
+    border: none;
+    color: white;
+    margin-left: 30px;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    }
+        
+#home-button:hover {
+    background-color: rgb(3, 32, 63);
+    }
+        
+h1 {
+    color: #0b40d1;
+    font-family: "Raleway", sans-serif;
+    font-weight: normal;
+    text-align: center;
+    text-shadow: 1px 1px 2px #070429;
+}
+        
+body,
+h1 {
+            letter-spacing: 3px
+     }
+        
+body {
+    height: 900px;
+    background-color: #FFFFFF;
+    font-family: "Raleway", sans-serif;
+    }
+        
+a:hover {
+    color: #3291e6;
+    text-decoration: none;
+    }
+
+
+        
+.container {
+    position: relative;
+    width: 900px;
+    clear: both;
+    }
+        
+#create-update input {
+    width: 100%;
+    clear: both;
+    }
+        
+.header-image {
+     background-image: url("recipient.jpg");
+    /* Set a specific height */
+    height: 30%;
+    /* Position and center the image to scale nicely on all screens */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    }
+
+        
+.header-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+     color: rgb(247, 243, 243);
+     }
+
+        
+#showCreate-button {
+     font-family: "Raleway", sans-serif;
+    font-weight: 500;
+     font-size: 18px;
+    letter-spacing: 1px;
+     padding: 10px 30px;
+    transition: 0.5s;
+    color: #fff;
+    background: #0b40d1;
+    display: inline-block;
+    margin-left: 30px;
+    border-radius: 15px;
+    }
+        
+#showCreate-button:hover {
+    background: #063a68;
+    text-decoration: none;
+    cursor: pointer;
+        }
+		
+/*Button that redirects to vaccinators Database*/  
+#vaccinatorsDB-button {
+   font-family: "Raleway", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 10px 30px;
+    transition: 0.5s;
+    color: #fff;
+    background-color: #0b40d1;
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 855px;
+    border-radius: 15px;
+    }
+        
+#vaccinatorsDB-button:hover {
+            background: #063a68;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+#create-button {
+    font-family: "Raleway", sans-serif;
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 8px 15px;
+            border-radius: 15px;
+            transition: 0.5s;
+            color: #fff;
+            background: #0b40d1;
+     }
+        
+#create-button:hover {
+    background: #063a68;
+    text-decoration: none;
+    }
+        
+#update-button {
+    font-family: "Raleway", sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 8px 15px;
+    border-radius: 15px;
+    transition: 0.5s;
+    color: #fff;
+    background: #0b40d1;
+}
+        
+#update-button:hover { 
+		    opacity: 0.8; 
+}
+		
+        
+#createUpdateForm {
+    border-collapse: collapse;
+    margin-left: 30px;
+    font-family: "Raleway", sans-serif;
+}
+
+        
+#recipientTable {
+    border-collapse: collapse;
+    width: 90%;
+    margin-left: 35px;
+    margin-right: 35px;
+}
+        
+#recipientTable td,
+#recipientTable th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+        
+#recipientTable tr:nth-child(even) {
+     background-color: #f2f2f2;
+    }
+        
+#recipientTable tr:hover {
+    background-color: #ddd;
+     }
+        
+#recipientTable th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+     background-color: #091e64;
+    color: white;
+    }
+        
+    #showUpdateButton {
+    color: black;
+    border: 2px solid #008CBA;
+}
+        
+#showUpdateButton:hover {
+        background-color: #008CBA;
+         color: white;
+}
+        
+#showUpdateButton {
+     border-radius: 12px;
+     transition: 0.5s;
+}
+        
+#doDeleteButton {
+    border-radius: 12px;
+    transition: 0.5s;
+}
+        
+#doDeleteButton:hover {
+    background-color: #555555;
+    color: white;
+}
+</style>	  
+	<Header>
+        <button class="btn" id="home-button"><a href="/index"><i class="fa fa-home"></i></button></a>
+        </button>
+        <button class="btn" id="logout-button"><a href="/logout"><i class="fa fa-sign-out" style="font-size:25px"></i>Logout</a></button>
+
+		<div class="topnav">
+             <!-- Reference to all the pages -->
+	    <a href="index.html">Home</a>
+        <a href="/database">SQL Vaccine Database</a>
+		<a href="/weather">Get weather through third party API</a>
+		<a href="/aimsir.html">Weather Chart</a>
+    </div>	 
+    </Header>
+    <!--- Header --->
+    <div class="header-image">
+        <div class="header-text">
+            <h1>Recipient Table</h1>
+        </div>
+    </div>
+
+    <!--- CRUD Form --->
+
+    <div id="create-update" style="display:none">
+
+        <h2><span id="createLabel">&nbsp;&nbsp; Add </span> <span id="updateLabel">&nbsp;&nbsp; Update</span> recipient </h2><br/>
+
+        <table id="createUpdateForm">
+            <tr>
+                <td>Recipient ID</td>
+                <td><input type="text" name="id" id="idInput" placeholder="id(phone number)"></td>
+            </tr>
+            <tr>
+                <td>Firstname</td>
+                <td><input type="text" name="firstname" placeholder="firstname"></td>
+            </tr>
+            <tr>
+                <td>Surname</td>
+                <td><input type="text" name="surname" placeholder="surname"></td>
+            </tr>
+            <tr>
+                <td>Vaccine</td>
+                <td><input type="text" name="vaccine" placeholder="vaccine"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <br/>
+                    <button id="create-button" onclick="doCreate()">Add</button>
+                    <button id="update-button" onclick="doUpdate()">Update</button><br/>
+                    <a href="/recipientdata" class="previous">&laquo; Back to Database</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="display">
+
+        <button id="showCreate-button" onClick="showCreate()">Add recipient</button>
+        <input type="button" id="vetsDB-button" onclick="location.href='/vaccinatordata';" value="Vaccinator table" />
+        <br/><br/>
+        <table id="recipientTable" class="table">
+            <tr>
+                <th>Recipient ID</th>
+                <th>First name</th>
+                <th>Surname</th>
+                <th>Vaccine</th>
+				<th></th>
+				<th></th>
+            </tr>
+
+        </table>
+
+    </div>
+
+<script>
+// functions recipient Table. 
+function showCreate() {
+        document.getElementById('display').style.display = "none";
+        document.getElementById('update-button').style.display = "none";
+        document.getElementById('create-button').style.display = "block";
+        document.getElementById('create-update').style.display = "block";
+        document.getElementById('createLabel').style.display = "inline";
+        document.getElementById('updateLabel').style.display = "none";
+
+    }
+
+function showUpdate(thisElem) {
+        var rowElement = thisElem.parentNode.parentNode;
+        recipient = readRecipientFromRow(rowElement);
+        populateForm(recipient);
+
+        document.getElementById('display').style.display = "none";
+        document.getElementById('update-button').style.display = "block";
+        document.getElementById('create-button').style.display = "none";
+        document.getElementById('create-update').style.display = "block";
+        document.getElementById('createLabel').style.display = "none";
+        document.getElementById('updateLabel').style.display = "inline";
+    }
+
+
+function readRecipientFromRow(rowElement) {
+        recipient = {};
+        recipient.id = rowElement.getAttribute("id");
+        recipient.firstname = rowElement.cells[1].firstChild.textContent;
+        recipient.surname = rowElement.cells[2].firstChild.textContent;
+        recipient.vaccine = rowElement.cells[3].firstChild.textContent;
+
+        return recipient;
+
+    }
+
+function doCreate() {
+        var form = document.getElementById('createUpdateForm');
+
+        var recipient = {};
+
+        recipient.id = form.querySelector('input[name="id"]').value;
+        recipient.firstname = form.querySelector('input[name="firstname"]').value;
+        recipient.surname = form.querySelector('input[name="surname"]').value;
+        recipient.vaccine = form.querySelector('input[name="vaccine"]').value;
+        createRecipientAjax(recipient);
+
+
+    }
+
+function populateForm(recipient) {
+        var form = document.getElementById('createUpdateForm');
+
+
+        form.querySelector('input[name="id"]').value = recipient.id;
+        form.querySelector('input[name="id"]').disabled = true;
+
+        form.querySelector('input[name="firstname"]').value = recipient.firstname;
+        form.querySelector('input[name="surname"]').value = recipient.surname;
+        form.querySelector('input[name="vaccine"]').value = recipient.vaccine;
+    }
+
+function clearForm() {
+        var form = document.getElementById('createUpdateForm');
+
+
+        form.querySelector('input[name="id"]').value = '';
+        form.querySelector('input[name="id"]').disabled = false;
+
+        form.querySelector('input[name="firstname"]').value = '';
+        form.querySelector('input[name="surname"]').value = '';
+        form.querySelector('input[name="vaccine"]').value = '';
+    }
+
+    
+host = window.location.origin;
+
+
+function createRecipientAjax(recipient) {
+        console.log(JSON.stringify(recipient));
+
+        $.ajax({
+            "url": host + "/recipients",
+            "method": "POST",
+            "data": JSON.stringify(recipient),
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success": function(result) {
+                recipient.id = result.id;
+                addRecipientToTable(recipient);
+                showDisplay();
+                clearForm();
+
+            },
+            "error": function(xhr, status, error) {
+                console.log("error" + error);
+            }
+        });
+
+    }
+
+function doUpdate() {
+        recipient = getRecipientFromForm();
+        updateServer(recipient);
+
+    }
+
+function updateServer(recipient) {
+        $.ajax({
+            "url": host + "/recipients/" + recipient.id,
+            "data": JSON.stringify(recipient),
+            "method": "PUT",
+            "dataType": "JSON",
+            contentType: "application/json; charset=utf-8",
+            "success": function(result) {
+                console.log(result);
+                updateTableRow(recipient);
+                showDisplay();
+                clearForm();
+
+            },
+            "error": function(xhr, status, error) {
+                console.log("error" + error);
+            }
+        });
+    }
+
+function doDelete(thisElem) {
+        var tableElement = document.getElementById('recipientTable');
+        var rowElement = thisElem.parentNode.parentNode;
+        var index = rowElement.rowIndex;
+        id = rowElement.getAttribute("id");
+
+        $.ajax({
+            "url": host + "/recipients/" + id,
+            "method": "DELETE",
+            "dateType": "JSON",
+            "success": function(result) {
+                tableElement.deleteRow(index);
+            },
+            "error": function(xhr, status, error) {
+                console.log(error);
+            }
+        });
+
+    }
+
+function updateTableRow(recipient) {
+        rowElement = document.getElementById(recipient.id);
+        rowElement.cells[1].firstChild.textContent = recipient.firstname;
+        rowElement.cells[2].firstChild.textContent = recipient.surname;
+        rowElement.cells[3].firstChild.textContent = recipient.vaccine;
+    }
+
+function getRecipientFromForm() {
+        var form = document.getElementById('createUpdateForm');
+
+        var recipient = {};
+        recipient.id = form.querySelector('input[name="id"]').value;
+        recipient.firstname = form.querySelector('input[name="firstname"]').value;
+        recipient.surname = form.querySelector('input[name="surname"]').value;
+        recipient.vaccine = form.querySelector('input[name="vaccine"]').value;
+           
+        return recipient;
+    }
+
+function showDisplay() {
+        document.getElementById('display').style.display = "block";
+        document.getElementById('create-update').style.display = "none";
+
+    }
+
+
+function populateTable() {
+       
+
+        $.ajax({
+            "url": host + '/recipients',
+            "method": 'GET',
+            "datatype": 'JSON',
+            "success": function(results) {
+                for (recipient of results) {
+                    addRecipientToTable(recipient);
+                }
+            },
+            "error": function(xhr, status, error) {
+                console.log("error " + error + " code:" + status);
+            }
+
+        });
+
+    }
+
+function addRecipientToTable(recipient) {
+
+        var tableElem = document.getElementById("recipientTable");
+        var rowElem = tableElem.insertRow(-1);
+        rowElem.setAttribute("id", recipient.id);
+        var cell1 = rowElem.insertCell(0);
+        cell1.innerHTML = recipient.id;
+        var cell2 = rowElem.insertCell(1);
+        cell2.innerHTML = recipient.firstname;
+        var cell3 = rowElem.insertCell(2);
+        cell3.innerHTML = recipient.surname;
+        var cell4 = rowElem.insertCell(3);
+        cell4.innerHTML = recipient.vaccine;
+        var cell5 = rowElem.insertCell(4);
+        cell5.innerHTML = '<button onclick="showUpdate(this)" id="showUpdateButton">Update</button>'
+        var cell6 = rowElem.insertCell(5);
+        cell6.innerHTML = '<button onclick="doDelete(this)" id="doDeleteButton">Delete</button>'
+    }
+    populateTable();
+</script>
+ {% endblock content %}
