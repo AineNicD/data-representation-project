@@ -3,9 +3,8 @@
 	<title>Vaccinator Table</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-/* various styles, some form w3schools, referenced in read me */
-
 <style>
+/* various styles, some form w3schools, referenced in read me */
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
@@ -292,7 +291,7 @@ a:hover {
     <div id="display">
 
         <button id="showCreate-button" onClick="showCreate()">Add vaccinator</button>
-        <input type="button" id="recipientsDB-button" onclick="location.href='/recipientdata';" value="Recipients table" />
+        <input type="button" onclick="location.href='/recipientdata';" value="Recipients table" />
         <br/><br/>
         <table id="vaccinatorTable" class="table">
             <tr>
@@ -397,7 +396,7 @@ function createVaccinatorAjax(vaccinator) {
             contentType: "application/json; charset=utf-8",
             "success": function(result) {
                 vaccinator.reg_no = result.reg_no;
-                addVaccinatorToTable(vaccinator);
+                addvaccinatorToTable(vaccinator);
                 showDisplay();
                 clearForm();
 
@@ -417,7 +416,6 @@ function doUpdate() {
 
 function updateServer(vaccinator) {
         $.ajax({
-		    //"url": "/vaccinators/" + vaccinator.reg_no,
             "url": host + "/vaccinators/" + vaccinator.reg_no,
 			"data": JSON.stringify(vaccinator),
 			"method": "PUT",
@@ -425,8 +423,9 @@ function updateServer(vaccinator) {
             contentType: "application/json; charset=utf-8",
             "success": function(result) {
                 updateTableRow(vaccinator);
+				clearForm();
                 showDisplay();
-                clearForm();
+                
 
             },
             "error": function(xhr, status, error) {
@@ -471,6 +470,7 @@ function getvaccinatorFromForm() {
         vaccinator.firstname = form.querySelector('input[name="firstname"]').value;
         vaccinator.surname = form.querySelector('input[name="surname"]').value;
         vaccinator.profession = form.querySelector('input[name="profession"]').value;
+		console.log(JSON.stringify(vaccinator));
         return vaccinator;
     }
 
@@ -501,7 +501,6 @@ function populateTable() {
     }
 
 function addvaccinatorToTable(vaccinator) {
-        console.log("Adding vaccinator to Table");
 
         var tableElem = document.getElementById("vaccinatorTable");
         var rowElem = tableElem.insertRow(-1);

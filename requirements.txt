@@ -6,3 +6,6 @@ requests==2.25.1
 werkzeug==1.0.1
 mysql-connector==2.2.9
 MarkupSafe==1.0
+Jinja2==2.11.2
+itsdangerous==1.1.0
+click==7.1.2

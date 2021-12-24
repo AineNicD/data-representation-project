@@ -2,11 +2,10 @@
  {% block content %} 
 
     <title>Recipient Table</title>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-
-/* various styles, some form w3schools, referenced in read me */
 <style>
+/* various styles, some form w3schools, referenced in read me */
 
 /* Style the top navigation bar */
 .topnav {
@@ -302,7 +301,7 @@ a:hover {
     <div id="display">
 
         <button id="showCreate-button" onClick="showCreate()">Add recipient</button>
-        <input type="button" id="vaccinatorsDB-button" onclick="location.href='/vaccinatordata';" value="Vaccinator table" />
+        <input type="button" onclick="location.href='/vaccinatordata';" value="Vaccinator table" />
         <br/><br/>
         <table id="recipientTable" class="table">
             <tr>
@@ -364,6 +363,7 @@ function doCreate() {
         recipient.firstname = form.querySelector('input[name="firstname"]').value;
         recipient.surname = form.querySelector('input[name="surname"]').value;
         recipient.vaccine = form.querySelector('input[name="vaccine"]').value;
+		console.log(JSON.stringify(recipient));
         createRecipientAjax(recipient);
 
 
@@ -409,8 +409,8 @@ function createRecipientAjax(recipient) {
             "success": function(result) {
                 recipient.id = result.id;
                 addRecipientToTable(recipient);
-                showDisplay();
                 clearForm();
+				showDisplay();
 
             },
             "error": function(xhr, status, error) {
@@ -436,8 +436,9 @@ function updateServer(recipient) {
             "success": function(result) {
                 console.log(result);
                 updateTableRow(recipient);
+				clearForm();
                 showDisplay();
-                clearForm();
+                
 
             },
             "error": function(xhr, status, error) {
@@ -481,7 +482,7 @@ function getRecipientFromForm() {
         recipient.firstname = form.querySelector('input[name="firstname"]').value;
         recipient.surname = form.querySelector('input[name="surname"]').value;
         recipient.vaccine = form.querySelector('input[name="vaccine"]').value;
-           
+		console.log(JSON.stringify(recipient));          
         return recipient;
     }
 

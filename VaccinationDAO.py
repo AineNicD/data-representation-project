@@ -1,5 +1,4 @@
 # deals with sql connector, functions for tables data, recipient and vaccinator. 
-
 import mysql.connector
 import dbconfig as cfg
 
@@ -8,18 +7,25 @@ class RecipientDao:
 
     db = ""
 
+    def connectToDB(self):
+        self.db = mysql.connector.connect( 
+            host=cfg.mysql['host'],
+            user=cfg.mysql['user'],
+            password=cfg.mysql['password'],
+            database=cfg.mysql['database']
+            )
+
     def __init__(self):
-
-        # Connect to Database
-        self.db = mysql.connector.connect(host=cfg.mysql['host'],
-                                          user=cfg.mysql['user'],
-                                          password=cfg.mysql['password'],
-                                          database=cfg.mysql['database'],
-                                          port='3306')
-
+        self.connectToDB()
+        
+    def getCursor(self):
+        if not self.db.is_connected():
+            self.connectToDB()
+        return self.db.cursor()
+   
 # Create new recipient 
     def create(self, recipient):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = "insert into recipients (id,firstname, surname, vaccine) values (%s,%s,%s,%s)"
         values = [
             recipient['id'], recipient['firstname'], recipient['surname'],
@@ -32,22 +38,21 @@ class RecipientDao:
 
 # Get all the recipients 
     def getAll(self):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = 'select * from recipients'
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
-        #print(results)
+        print(results)
         for result in results:
             resultAsDict = self.convertToDict(result)
             returnArray.append(resultAsDict)
-
         cursor.close()
         return returnArray
 
 # Find a recipient by id
     def findById(self, id):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = 'select * from recipients where id = %s'
         values = [id]
         cursor.execute(sql, values)
@@ -57,7 +62,7 @@ class RecipientDao:
 
 # Update a recipient
     def update(self, recipient):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = "update recipients set firstname = %s, surname = %s, vaccine = %s where id = %s"
         values = [
             recipient['firstname'], recipient['surname'],
@@ -70,7 +75,7 @@ class RecipientDao:
 
 # Delete a recipient
     def delete(self, id):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = 'delete from recipients where id = %s'
         values = [id]
         cursor.execute(sql, values)
@@ -97,18 +102,26 @@ recipientDao = RecipientDao()
 class VaccinatorDao:
     db = ""
 
-    def __init__(self):
-             # Connect to Database
-        self.db = mysql.connector.connect(host=cfg.mysql['host'],
-                                        user=cfg.mysql['user'],
-                                        password=cfg.mysql['password'],
-                                        database=cfg.mysql['database'],
-                                        port='3306')    
-    
+    def connectToDB(self):
+        self.db = mysql.connector.connect( 
+            host=cfg.mysql['host'],
+            user=cfg.mysql['user'],
+            password=cfg.mysql['password'],
+            database=cfg.mysql['database']
+            )
 
+    def __init__(self):
+        self.connectToDB()
+        
+    def getCursor(self):
+        if not self.db.is_connected():
+            self.connectToDB()
+        return self.db.cursor()
+        
+        
 # Create new vaccinator 
     def createVaccinator(self, vaccinator):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = "insert into vaccinators (reg_no, firstname, surname, profession) values (%s,%s,%s,%s)"
         values = [
             vaccinator['reg_no'], vaccinator['firstname'], vaccinator['surname'],
@@ -121,7 +134,7 @@ class VaccinatorDao:
 
 # Get all the vaccinators
     def getAllVaccinator(self):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = 'select * from vaccinators'
         cursor.execute(sql)
         results = cursor.fetchall()
@@ -135,7 +148,7 @@ class VaccinatorDao:
 
 # Find a specific vaccinator by reg_no
     def findByReg(self, reg_no):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = 'select * from vaccinators where reg_no = %s'
         values = [reg_no]
         cursor.execute(sql, values)
@@ -145,7 +158,7 @@ class VaccinatorDao:
 
 # Update a vaccinator
     def updateVaccinator(self, vaccinator):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = "update vaccinators set firstname = %s, surname = %s, profession = %s where reg_no = %s"
         values = [
             vaccinator['firstname'], vaccinator['surname'],
@@ -158,7 +171,7 @@ class VaccinatorDao:
 
 # Delete a vaccinator
     def deleteVaccinator(self, reg_no):
-        cursor = self.db.cursor()
+        cursor = self.getCursor()
         sql = 'delete from vaccinators where reg_no = %s'
         values = [reg_no]
         cursor.execute(sql, values)
