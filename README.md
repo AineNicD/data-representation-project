@@ -4,7 +4,7 @@
 This repository contains my submission for the Big Project assessment in Data Representation.
 # Pythonanywhere link: 
 https://ainedatarep.pythonanywhere.com
-- Pythonanywhere needs reloading at times for the tables to display. Working on fixing this today. Code is adjusted for python anywhere. 
+- For the purpose of this assignment the login details are displayed in the form for convenience. 
 
 ## Project description: 
 ~~~
