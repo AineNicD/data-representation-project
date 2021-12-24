@@ -22,6 +22,7 @@ app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'root'
 app.config['MYSQL_DB'] = 'Vaccination'
 
+#init MYSQL
 mysql = MySQL(app)
 
 
@@ -71,8 +72,9 @@ def home():
 
     return render_template('index.html')
     
-    
+  
 # database page
+#curl "http://127.0.0.1:5000/database"
 @app.route('/database')
 def database():
 
@@ -82,6 +84,7 @@ def database():
     return render_template('database.html')
     
 # recipient data on recipient page
+#curl "http://127.0.0.1:5000/recipientdata"
 @app.route('/recipientdata')
 def recipientData():
 
@@ -92,8 +95,7 @@ def recipientData():
     
     
 # get all recipients in json
-# curl -i "http://127.0.0.1:5000/recipients"
-
+# curl "http://127.0.0.1:5000/recipients"
 @app.route('/recipients')
 def getAll():
 
@@ -131,7 +133,7 @@ def create():
     return jsonify(recipientAdd)
 
 # update recipient
-# #curl -i -H "Content-Type:application/json" -X PUT -d "{\"vaccine\":\"Moderna\"}" http://127.0.0.1:5000/recipients/0851112222
+# curl -i -H "Content-Type:application/json" -X PUT -d "{\"vaccine\":\"Moderna\"}" http://127.0.0.1:5000/recipients/0851112222
 @app.route('/recipients/<id>', methods =['PUT'])
 def update(id):
     foundRecipient=recipientDao.findById(id)
@@ -172,6 +174,7 @@ def vaccinatorData():
     return render_template('vaccinator.html')
 
 # get all vaccinators
+#curl "http://127.0.0.1:5000/vaccinators"
 @app.route('/vaccinators')
 def getAllVaccinator():
 
