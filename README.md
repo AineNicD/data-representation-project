@@ -5,7 +5,7 @@ This repository contains my submission for the Big Project assessment in Data Re
 # Pythonanywhere link: 
 https://ainedatarep.pythonanywhere.com
 - Pythonanywhere needs reloading at times for the tables to display. Working on fixing this today. Code is adjusted for python anywhere. 
-- 
+
 ## Project description: 
 ~~~
 Write a program that demonstrates that you understand creating and consuming 
