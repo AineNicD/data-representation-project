@@ -4,7 +4,7 @@
 This repository contains my submission for the Big Project assessment in Data Representation.
 # Pythonanywhere link: 
 https://ainedatarep.pythonanywhere.com
-- The login details are displayed in the form for the purpose of this assessment. 
+- The login details are displayed in the login form for the purpose of this assessment. 
 
 ## Project description: 
 ~~~
