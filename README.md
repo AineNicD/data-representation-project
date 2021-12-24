@@ -2,8 +2,9 @@
 ![image](https://github.com/AineNicD/data-representation-project/blob/main/templates/flask.png)
 
 This repository contains my submission for the Big Project assessment in Data Representation.
-# Pythonanywhere link: 
-- Pythonanywhere needs reloading at times for the tables to display. I am working on figuring out if this is an error in my code on python anywhere or a problem with python anywhere itself. SQL has a 5 minute time out on connections on python anywhere, I am researching how to edit my code to accomodate this.
+# Pythonanywhere link: ainedatarep.pythonanywhere.com
+- Pythonanywhere needs reloading at times for the tables to display. Working on fixing this today. Code is adjusted for python anywhere. 
+- 
 ## Project description: 
 ~~~
 Write a program that demonstrates that you understand creating and consuming 
