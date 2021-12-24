@@ -1,7 +1,7 @@
-# deals with sql connector, functions for table data, recipient and vaccinator. 
+# deals with sql connector, functions for tables data, recipient and vaccinator. 
 
 import mysql.connector
-import dbconfig as dbconfig
+import dbconfig as cfg
 
 
 class RecipientDao:
@@ -10,14 +10,14 @@ class RecipientDao:
 
     def __init__(self):
 
-        #Connect the Database
-        self.db = mysql.connector.connect(host=dbconfig.mysql['host'],
-                                          user=dbconfig.mysql['user'],
-                                          password=dbconfig.mysql['password'],
-                                          database=dbconfig.mysql['database'],
+        # Connect to Database
+        self.db = mysql.connector.connect(host=cfg.mysql['host'],
+                                          user=cfg.mysql['user'],
+                                          password=cfg.mysql['password'],
+                                          database=cfg.mysql['database'],
                                           port='3306')
 
-#create new recipient 
+# Create new recipient 
     def create(self, recipient):
         cursor = self.db.cursor()
         sql = "insert into recipients (id,firstname, surname, vaccine) values (%s,%s,%s,%s)"
@@ -30,7 +30,7 @@ class RecipientDao:
         cursor.close()
         return cursor.lastrowid
 
-#Get all the recipients 
+# Get all the recipients 
     def getAll(self):
         cursor = self.db.cursor()
         sql = 'select * from recipients'
@@ -45,7 +45,7 @@ class RecipientDao:
         cursor.close()
         return returnArray
 
-#Find a recipient by id
+# Find a recipient by id
     def findById(self, id):
         cursor = self.db.cursor()
         sql = 'select * from recipients where id = %s'
@@ -55,7 +55,7 @@ class RecipientDao:
         cursor.close()
         return self.convertToDict(result)
 
-#Update a recipient
+# Update a recipient
     def update(self, recipient):
         cursor = self.db.cursor()
         sql = "update recipients set firstname = %s, surname = %s, vaccine = %s where id = %s"
@@ -68,7 +68,7 @@ class RecipientDao:
         cursor.close()
         return recipient
 
-#Delete a recipient
+# Delete a recipient
     def delete(self, id):
         cursor = self.db.cursor()
         sql = 'delete from recipients where id = %s'
@@ -78,7 +78,7 @@ class RecipientDao:
         cursor.close()
         return {}
 
-#Convert a list to dictionary
+# Convert a list to dictionary
     def convertToDict(self, result):
         colnames = ['id', 'firstname', 'surname', 'vaccine']
         recipient = {}
@@ -98,15 +98,15 @@ class VaccinatorDao:
     db = ""
 
     def __init__(self):
-             #Connect the MySQL Database
-        self.db = mysql.connector.connect(host=dbconfig.mysql['host'],
-                                        user=dbconfig.mysql['user'],
-                                        password=dbconfig.mysql['password'],
-                                        database=dbconfig.mysql['database'],
+             # Connect to Database
+        self.db = mysql.connector.connect(host=cfg.mysql['host'],
+                                        user=cfg.mysql['user'],
+                                        password=cfg.mysql['password'],
+                                        database=cfg.mysql['database'],
                                         port='3306')    
     
 
-#Add new vaccinator 
+# Create new vaccinator 
     def createVaccinator(self, vaccinator):
         cursor = self.db.cursor()
         sql = "insert into vaccinators (reg_no, firstname, surname, profession) values (%s,%s,%s,%s)"
@@ -119,7 +119,7 @@ class VaccinatorDao:
         cursor.close()
         return cursor.lastrowid
 
-#Get all the vaccinators
+# Get all the vaccinators
     def getAllVaccinator(self):
         cursor = self.db.cursor()
         sql = 'select * from vaccinators'
@@ -133,7 +133,7 @@ class VaccinatorDao:
         cursor.close()
         return returnArray
 
-#Find a specific vaccinator by reg_no
+# Find a specific vaccinator by reg_no
     def findByReg(self, reg_no):
         cursor = self.db.cursor()
         sql = 'select * from vaccinators where reg_no = %s'
@@ -143,7 +143,7 @@ class VaccinatorDao:
         cursor.close()
         return self.convertToDict(result)
 
-#Update a vaccinator
+# Update a vaccinator
     def updateVaccinator(self, vaccinator):
         cursor = self.db.cursor()
         sql = "update vaccinators set firstname = %s, surname = %s, profession = %s where reg_no = %s"
@@ -156,7 +156,7 @@ class VaccinatorDao:
         cursor.close()
         return vaccinator
 
-#Delete a vaccinator
+# Delete a vaccinator
     def deleteVaccinator(self, reg_no):
         cursor = self.db.cursor()
         sql = 'delete from vaccinators where reg_no = %s'
@@ -166,7 +166,7 @@ class VaccinatorDao:
         cursor.close()
         return {}
 
-#Convert a list to dictionary
+ #Convert a list to dictionary
     def convertToDict(self, result):
         colnames = ['reg_no', 'firstname', 'surname', 'profession']
         vaccinator = {}

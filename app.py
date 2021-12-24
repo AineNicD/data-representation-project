@@ -5,16 +5,16 @@ import json
 import MySQLdb.cursors
 import mysql.connector
 from mysql.connector import cursor
-import dbconfig 
+import dbconfig as cfg
 from VaccinationDAO import recipientDao, vaccinatorDao
 
 
-#Create the Flask app
+# Create the Flask app
 app = Flask(__name__,
             static_url_path='',
             static_folder='templates')
 
-# received an error needed a secret key so generated a random one 
+# random secret key 
 app.secret_key = '02774c1c1fc7723ee19f4193'
 
 app.config['MYSQL_HOST'] = 'localhost'
@@ -62,7 +62,7 @@ def logout():
     return render_template('login.html')
 
 
-#homepage
+# homepage
 @app.route('/index')
 def home():
 
@@ -72,7 +72,7 @@ def home():
     return render_template('index.html')
     
     
-#database page
+# database page
 @app.route('/database')
 def database():
 
@@ -91,7 +91,9 @@ def recipientData():
     return render_template('recipient.html')
     
     
-# get all recipients
+# get all recipients in json
+# curl -i "http://127.0.0.1:5000/recipients"
+
 @app.route('/recipients')
 def getAll():
 
@@ -101,6 +103,7 @@ def getAll():
     return jsonify(recipientDao.getAll())
     
 # find recipient by id
+# #curl "http://127.0.0.1:5000/recipients/0851112222"
 @app.route('/recipients/<id>')
 def findById(id):
     if not 'username' in session:
@@ -109,6 +112,7 @@ def findById(id):
     return jsonify(recipientDao.findById(id))
 
 # create recipient
+# curl -i -H "Content-Type:application/json" -X POST -d "{\"id\":\"0861224532\",\"firstname\":\"Andrew\",\"surname\":\"Beatty\",\"vaccine\":\"Pfizer\"}" http://127.0.0.1:5000/recipients
 @app.route('/recipients', methods=['POST'])
 def create():
 
@@ -127,6 +131,7 @@ def create():
     return jsonify(recipientAdd)
 
 # update recipient
+# #curl -i -H "Content-Type:application/json" -X PUT -d "{\"vaccine\":\"Moderna\"}" http://127.0.0.1:5000/recipients/0851112222
 @app.route('/recipients/<id>', methods =['PUT'])
 def update(id):
     foundRecipient=recipientDao.findById(id)
@@ -176,7 +181,8 @@ def getAllVaccinator():
     return jsonify(vaccinatorDao.getAllVaccinator())
 
 
-# find vaccinator by id 
+# find vaccinator by reg_no
+# #curl "http://127.0.0.1:5000/vaccinators/607040
 @app.route('/vaccinators/<reg_no>')
 def findByReg(reg_no):
     if not 'username' in session:
@@ -186,6 +192,7 @@ def findByReg(reg_no):
 
 
 # create vaccinator
+# curl -i -H "Content-Type:application/json" -X POST -d "{\"reg_no\":\"1861225\",\"firstname\":\"Andrew\",\"surname\":\"Beatty\",\"profession\":\"Lecturer\"}" http://127.0.0.1:5000/vaccinators
 @app.route('/vaccinators', methods=['POST'])
 def createVaccinator():
 
@@ -203,7 +210,8 @@ def createVaccinator():
 
     return jsonify(vaccinatorAdd)
 
-# update vaccinator 
+# update vaccinator using reg_no
+# #curl -i -H "Content-Type:application/json" -X PUT -d "{\"surname\":\"Neuman\"}" http://127.0.0.1:5000/vaccinators/607040
 @app.route('/vaccinators/<reg_no>', methods=['PUT'])
 def updateVaccinator(reg_no):
     foundVaccinator = vaccinatorDao.findByReg(reg_no)

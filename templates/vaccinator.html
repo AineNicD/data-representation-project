@@ -3,6 +3,8 @@
 	<title>Vaccinator Table</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+/* various styles, some form w3schools, referenced in read me */
+
 <style>
 /* Style the top navigation bar */
 .topnav {
@@ -22,9 +24,7 @@
   padding: 14px 16px;
   text-decoration: none;
 }
-
-  
-        
+       
 #logout-button {
         margin-top: -65px;
         cursor: pointer;
@@ -264,19 +264,19 @@ a:hover {
         <table id="createUpdateForm">
             <tr>
                 <td>Registration Number</td>
-                <td><input type="number" name="reg_no" id="idInput" placeholder="Enter reg no"></td>
+                <td><input type="number" name="reg_no" id="idInput" placeholder="reg no"></td>
             </tr>
             <tr>
                 <td>Firstname</td>
-                <td><input type="text" name="firstname" placeholder="Enter firstname"></td>
+                <td><input type="text" name="firstname" placeholder="firstname"></td>
             </tr>
             <tr>
                 <td>Surname</td>
-                <td><input type="text" name="surname" placeholder="Enter surname"></td>
+                <td><input type="text" name="surname" placeholder="surname"></td>
             </tr>
             <tr>
                 <td>Profession</td>
-                <td><input type="text" name="profession" placeholder="Enter profession"></td>
+                <td><input type="text" name="profession" placeholder="profession"></td>
             </tr>
             <tr>
                 <td></td>
@@ -389,6 +389,7 @@ function createVaccinatorAjax(vaccinator) {
         console.log(JSON.stringify(vaccinator));
 
         $.ajax({
+		     //"url": "http://127.0.0.1:5000/vaccinators",
             "url": host + "/vaccinators",
             "method": "POST",
             "data": JSON.stringify(vaccinator),
@@ -416,6 +417,7 @@ function doUpdate() {
 
 function updateServer(vaccinator) {
         $.ajax({
+		    //"url": "/vaccinators/" + vaccinator.reg_no,
             "url": host + "/vaccinators/" + vaccinator.reg_no,
 			"data": JSON.stringify(vaccinator),
 			"method": "PUT",
@@ -481,6 +483,7 @@ function showDisplay() {
 function populateTable() {
 
         $.ajax({
+		    //"url": 'http://127.0.0.1:5000/vaccinators',
             "url": host + '/vaccinators',
             "method": 'GET',
             "datatype": 'JSON',

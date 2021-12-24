@@ -37,6 +37,22 @@
      color: white;
     }
 	
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+}
+	
 	</style>	
 	<Header>
         <button class="btn" id="home-button"><a href="/index"><i class="fa fa-home"></i></button></a>
@@ -65,5 +81,6 @@
         </div>
     </div>
 </div>
+ <a href="/weather" class="previous">&laquo; Back to Get Weather</a>
  {% endblock content %}
  
